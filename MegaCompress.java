@@ -74,8 +74,6 @@ public class MegaCompress
 		    {
 			if(preImages.get(iter).str.equals(preImage))
 			    {
-				/* System.out.println("2nd copy of string added, with pre image origin of " +
-				   preImageOriginIndex); */
 				/* We've found a matching preImage, so all we need to do is update preImageOriginIndexes
 				 * with the new pre image origin index. */
 				preImages.get(iter).preImageOriginIndexes.add(preImageOriginIndex);
@@ -85,7 +83,6 @@ public class MegaCompress
 		    }
 		if(!found)
 		    {
-			// System.out.println("Adding new pre image origin " + preImageOriginIndex);
 			/* We didn't find the preImage in preImages. So we have a collision. We will update
 			 * preImages. */
 			preImages.add(new preImageData(preImage, preImageOriginIndex));
@@ -104,18 +101,11 @@ public class MegaCompress
 				     "we should only try to add the exact same string once, since preImages should " +
 				     "only contain one copy of each string and we are copying from preImages.");
 				System.exit(-1);
-				// /* We've found a matching preImage, so all we
-				//  * need to do is update preImageOriginIndexes
-				//  * with the new pre image origin index. */
-				// preImages.get(iter).preImageOriginIndexes
-				//     = preImageOriginIndexes;
-				// found = true;
 				break;
 			    }
 		    }
 		if(!found)
 		    {
-			// System.out.println("Adding pre image and pre image origins for new table pre image location");
 			/* We didn't find the preImage in preImages. So we have a collision. We will update
 			 * preImages. */
 			preImages.add(new preImageData(preImage, preImageOriginIndexes));
@@ -194,7 +184,7 @@ public class MegaCompress
 		{
 		    hash = -hash;
 		}
-	    // System.out.println("hash = " + (int)(hash % tblSize) + ", for str \"" + str + "\"");
+	    
 	    return (int)(hash % tblSize);
 	}
 
@@ -204,7 +194,6 @@ public class MegaCompress
 	    
 	    if(table[preImageHash] == null)
 		{
-		    // System.out.println("No collision.");
 		    /* We're adding a new item to table, we must inc our load factor variable. */
 		    currentTableLoadingFactor++;
 		    table[preImageHash] = new hashVectorElement
@@ -212,7 +201,6 @@ public class MegaCompress
 		}
 	    else
 		{
-		    // System.out.println("PreImageHash collision.");
 		    table[preImageHash].potentialAddString(preImage, preImageOriginIndex);
 		}
 

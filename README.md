@@ -9,4 +9,16 @@ The program first compresses the input text using an RLE scheme that is implemen
 1. *It uses ASCII numbers for the length for the RLE encoding. So the text shouldn't contain numbers. This could be alleviated by making the repeat count a fixed length (but this would also make it less efficient.*
 2.  *It uses Hiragana and Katakana numbers as special characters for both the RLE and dictionary encoding. This is not just a problem because the program cannot be used on Japanese text. It is a problem because when the compressed representation is written out (using a BufferedWriter in Java), it will be written out in UTF-16, which is a variable length encoding. Thus the compressed text can be less characters than the original text, but take up more space. However as far as we know it should take up less memory when the program is running because Java will always use at least two bytes for a given character (even if the UTF-16 representation is less, it will be padded.) This could be fixed by just using character above 128, but less than 256. However we are using that range for the pre-image reference numbers. Anyway all of that is to say that the program could be modified so that there would be at least some gain when written to disc.*
 
-*It is of note that the above described problems won't be a problem for the intended use of the compression scheme since it is intended to be used in a situation where we have a number of 16 bit values that are always quite a bit less than the full range of a 16 bit number. This means that we can use values at the top of the range for special values and we can just use a fixed length encoding for length for RLE and for pre-image references. So basically because of the nature of the data we want to encode we should benefit from this encoding scheme. We should also note that the RLE compression part of the program is fairly inefficient in terms of time complexity. However that data we are going to compress is always of a fixed (and manageable length).*
+*It is of note that the above described problems won't be a problem for the
+intended use of the compression scheme since it is intended to be used in a
+situation where we have a number of 16 bit values that are always quite a bit
+less than the full range of a 16 bit number. This means that we can use values
+at the top of the range for special values and we can just use a fixed length
+encoding for length for RLE and for pre-image references. So basically because
+of the nature of the data we want to encode we should benefit from this encoding
+scheme. We should also note that the RLE compression part of the program is
+fairly inefficient in terms of time complexity. However that data we are going
+to compress is always of a fixed (and manageable length). Also note that the
+program definitely needs a bit of work, but as mentioned this is really for
+another project, so we will be translating it into C++ and cleaning it up a bit
+and doing much more testing.*

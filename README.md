@@ -22,3 +22,6 @@ to compress is always of a fixed (and manageable length). Also note that the
 program definitely needs a bit of work, but as mentioned this is really for
 another project, so we will be translating it into C++ and cleaning it up a bit
 and doing much more testing.*
+
+
+*We've found a bug in the code around 646 that results in less optimal compression in terms of the dictionary side of things. However we haven't fixed it, because as stated above we wrote this code to use in a C++ project and we've fixed the code there. We are just making a note here so that if we ever want to use this code for something, we know to fix it.*
